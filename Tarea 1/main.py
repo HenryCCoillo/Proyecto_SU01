@@ -70,7 +70,7 @@ Opción 11: Salir del Programa.
                     print("Debes Escribir un numero Valido")
                     continue
                 
-                if type(opcion) == int:
+                if opcion:
                     break
 
             libro = Libro()
