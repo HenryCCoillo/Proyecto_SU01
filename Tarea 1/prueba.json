@@ -1,0 +1,21 @@
+{
+    "Libro_1":
+        {
+            "id": "1",
+            "titulo":"La ciudad y los perro",
+            "genero":" Ficción",
+            "isbn":" 9786124262708",
+            "editorial":"Editorial Renacimiento",
+            "autor":"Mario Vargas Llosa"
+        },
+    "Libro_2":
+        {
+            "id": "2",
+            "titulo":"La ciudad ",
+            "genero":" Ficción",
+            "isbn":" 978612sdfdsf708",
+            "editorial":"Renacimiento",
+            "autor":"Vargas Llosa"
+        }
+
+}
