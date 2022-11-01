@@ -1,7 +1,7 @@
 from ast import While
 from os import path
-import json
 import csv
+import pandas as pd
 
 class Libro:
     def __init__(self,id:str = None ,titulo:str = None,genero:str= None,isbn= None,editorial= None,autor= None) -> None:
@@ -29,29 +29,18 @@ class Libro:
 
 
     def listar_libros(self):
-        with open("prueba.json",encoding="utf-8") as archivo:
-            datos_libros = json.load(archivo)
-
-            for i in datos_libros:
-                diccionario_libro = datos_libros[i]
-                nombre_libro_id =diccionario_libro["id"]
-                nombre_libro_titulo = diccionario_libro["titulo"]
-                nombre_libro_genero =diccionario_libro["genero"] 
-                nombre_libro_isbn =diccionario_libro["isbn"] 
-                nombre_libro_editorial =diccionario_libro["editorial"] 
-                nombre_libro_autor =diccionario_libro["autor"] 
-                print(f"\n-El Libro llamano {nombre_libro_titulo}, su genero es {nombre_libro_genero}, su codigo de isbn es {nombre_libro_isbn}, la editorial es {nombre_libro_editorial} y el autor es {nombre_libro_autor}\n")
-
+        data=pd.read_csv("D:\BootCamp\\Libros.csv")
+        data
 
 if __name__ == '__main__':
     try:
         while True:
             print("""
-Opción 1: Leer archivo de disco duro (.txt o csv) que cargue 3 libros.
+Opción 1: Leer archivo de disco duro (csv).
 Opción 2: Listar libros.
 Opción 3: Agregar libro.
 Opción 4: Eliminar libro.
-Opción 5: Buscar libro por ISBN o por título. Se debe sugerir las opciones y listar el resultado.
+Opción 5: Buscar libro por título()
 Opción 6: Ordenar libros por título.
 Opción 7: Buscar libros por autor, editorial o género. Se deben sugerir las opciones y listar los resultados.
 Opción 8: Buscar libros por número de autores. Se debe ingresar un número por ejemplo 2 (hace referencia a dos autores) y se deben listar todos los libros 
@@ -75,7 +64,7 @@ Opción 11: Salir del Programa.
             if opcion == 1:
                 libro.leer_archivo()
             elif opcion ==2:
-                pass
+                libro.listar_libros()
 
             elif opcion ==3:
                 pass
