@@ -27,6 +27,17 @@ class Libro:
         else:
             print("Escriba el archivo")
 
+    def leer_archivo(self):
+        libro = input("Escriba el archivo : ")
+        if libro:
+            if path.exists(libro):
+                with open(libro, encoding="utf-8") as archivo:
+                    print(archivo.read())
+            else:
+                print("El archivo no existe")
+        else:
+            print("Escriba el archivo")
+
     def listar_libros(self):
         with open("prueba.json", encoding="utf-8") as archivo:
             datos_libros = json.load(archivo)
