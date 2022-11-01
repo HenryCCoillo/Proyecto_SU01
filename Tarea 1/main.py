@@ -62,7 +62,16 @@ Opción 9: Editar o actualizar datos de un libro (título, género, ISBN, editor
 Opción 10: Guardar libros en archivo de disco duro (.txt o csv).
 Opción 11: Salir del Programa.
             """)
-            opcion = int(input("Digite la Opcion: "))
+
+            while True:
+                try:
+                    opcion = int(input("Digite la Opcion: "))
+                except ValueError:
+                    print("Debes Escribir un numero Valido")
+                    continue
+                
+                if type(opcion) == int:
+                    break
 
             libro = Libro()
             if opcion == 1:
