@@ -2,7 +2,7 @@ from ast import While
 from os import path
 import json
 
-#Aqui hare mis cambios al codigo para una mejora de ello
+
 class Libro:
     def __init__(self, id: str = None, titulo: str = None, genero: str = None, isbn=None, editorial=None,
                  autor=None) -> None:
@@ -15,28 +15,6 @@ class Libro:
 
     def __del__(self):
         return None
-
-    def leer_archivo(self):
-        libro = input("Escriba el archivo : ")
-        if libro:
-            if path.exists(libro):
-                with open(libro, encoding="utf-8") as archivo:
-                    print(archivo.read())
-            else:
-                print("El archivo no existe")
-        else:
-            print("Escriba el archivo")
-
-    def leer_archivo(self):
-        libro = input("Escriba el archivo : ")
-        if libro:
-            if path.exists(libro):
-                with open(libro, encoding="utf-8") as archivo:
-                    print(archivo.read())
-            else:
-                print("El archivo no existe")
-        else:
-            print("Escriba el archivo")
 
     def leer_archivo(self):
         libro = input("Escriba el archivo : ")
