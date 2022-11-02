@@ -5,7 +5,7 @@ import pandas as pd
 from csv import DictWriter
 
 class Libro:
-    def __init__(self,id:str = None ,titulo:str = None,genero:str= None,isbn= None,editorial= None,autor= None) -> None:
+    def __init__(self,id:int = None ,titulo:str = None,genero:str= None,isbn= None,editorial= None,autor= None) -> None:
         self.__id = id
         self.__titulo = titulo
         self.__genero = genero
@@ -17,7 +17,7 @@ class Libro:
         return None
 
     def leer_archivo(self):
-        libro = input("Escriba el archivo : ")
+        libro = input("Escriba el archivo a leer: ")
         if libro:
             if path.exists(libro):
                 if os.path.splitext(libro)[1] == '.txt':
@@ -33,13 +33,12 @@ class Libro:
             else:
                 print("El archivo no existe")
         else:
-            print("Escriba el archivo")
+            print("El Input esta Vacio")
 
     def listar_libros(self):
-        data=pd.read_csv("Libros.csv")
-        print(data)
+        data=pd.read_csv("Libros.csv",index_col="id")
+        return data
         
-
     def agregar_libros(self):
         
         codigo=input("ingrese ID: ")
@@ -49,7 +48,7 @@ class Libro:
         editorial=input("Ingrese editorial: ")
         autor=input("Ingrese autor: ")
         
-        headersCSV = ['id','titulo','genero','isbn','editorial','autor']      
+        headersCSV = ['id','titulo','genero','isbn','editorial','autor']
 
         dict={'id':codigo,'titulo':titulo,'genero':genero,'isbn':isbn,'editorial':editorial,'autor':autor}
         with open('Libros.csv', 'a', newline='',encoding='utf-8-sig') as f_object:
@@ -57,15 +56,8 @@ class Libro:
             dictwriter_object.writerow(dict)
             f_object.close()
 
-    def eliminar_libro(self):
-        data=pd.read_csv("Libros.csv")
-        print(data)
-        eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
-        id_filas = [id_fila for id_fila,fila in data.iterrows()]
-        while eliminar_fila_libro not in id_filas:
-            eliminar_fila_libro = int(input("El ID no existe, Escriba el ID a Eliminar: "))
-        data.set_index('id',inplace=True) 
-        data = data.drop(eliminar_fila_libro) 
+    def eliminar_libro(self,data,id):
+        data = data.drop(id) 
         data.to_csv('Libros.csv')
         
 
@@ -98,17 +90,61 @@ Opción 11: Salir del Programa.
             if opcion == 1:
                 libro.leer_archivo()
             elif opcion ==2:
-                libro.listar_libros()
+                data = libro.listar_libros()
+                print(data)
+
             elif opcion ==3:
                 libro.agregar_libros()
+
             elif opcion ==4:
-                libro.eliminar_libro()
+
+                data = libro.listar_libros()
+                print(data)                
+                id_filas = [id_fila for id_fila,fila in data.iterrows()]
+                # id_filas = list(set(data["id"]))
+                eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
+
+                while eliminar_fila_libro not in id_filas:
+                    eliminar_fila_libro = int(input("El ID no existe, Escriba el ID a Eliminar: "))
+
+                libro.eliminar_libro(data,id=eliminar_fila_libro)
+
             elif opcion ==5:
                 pass
             elif opcion ==6:
                 pass
             elif opcion ==7:
-                pass
+                data = libro.listar_libros()
+                print(data)
+                buscar = input("""Buscar libro por: autor, editorial o género: """).lower()
+                if buscar == "autor":
+                    lista_autor = list(set(data["autor"]))
+                    buscar_autor = input("Escriba el autor a buscar: ")
+                    while buscar_autor not in lista_autor:
+                        buscar_autor = input("El autor no se encuentra, Escriba otro autor a buscar: ")
+                    # data[data["autor"].str.contains("Ciro Alegría")]
+                    autor = data[data["autor"] == buscar_autor]
+                    print(autor)
+
+                elif buscar == "editorial":
+                    lista_editorial = list(set(data["editorial"]))
+                    buscar_editorial = input("Escriba la editorial a buscar: ")
+                    while buscar_editorial not in lista_editorial:
+                        buscar_editorial = input("La editorial no se encuentra, Escriba otra editorial a buscar: ")
+                    editorial = data[data["editorial"] == buscar_editorial]
+                    print(editorial)
+
+                elif buscar == "género" or buscar == "genero":
+                    lista_genero = list(set(data["genero"]))
+                    buscar_genero = input("Escriba el genero a buscar: ")
+                    while buscar_genero not in lista_genero:
+                        buscar_genero = input("El genero no se encuentra, Escriba otra genero a buscar: ")
+                    genero = data[data["genero"] == buscar_genero]
+                    print(genero)
+
+                else:
+                    print("No existe esa categoria")
+
             elif opcion ==8:
                 pass
             elif opcion ==9:
