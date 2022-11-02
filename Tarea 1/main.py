@@ -61,11 +61,13 @@ class Libro:
         data=pd.read_csv("Libros.csv")
         print(data)
         eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
+        id_filas = [id_fila for id_fila,fila in data.iterrows()]
+        while eliminar_fila_libro not in id_filas:
+            eliminar_fila_libro = int(input("El ID no existe, Escriba el ID a Eliminar: "))
         data.set_index('id',inplace=True) 
         data = data.drop(eliminar_fila_libro) 
         data.to_csv('Libros.csv')
         
-
 
 if __name__ == '__main__':
     try:
@@ -91,8 +93,6 @@ Opción 11: Salir del Programa.
                     break
                 except ValueError:
                     print("Debes Escribir un numero Valido")
-                    continue
-
 
             libro = Libro()
             if opcion == 1:
@@ -105,25 +105,21 @@ Opción 11: Salir del Programa.
                 libro.eliminar_libro()
             elif opcion ==5:
                 pass
-
             elif opcion ==6:
                 pass
-
             elif opcion ==7:
                 pass
-
             elif opcion ==8:
                 pass
-
             elif opcion ==9:
                 pass
-
             elif opcion ==10:
                 pass
-
             elif opcion == 11:
                 del libro
                 break
+            else:
+                print("La Opcion no existe")
 
     except KeyboardInterrupt:
         print("Saliendo...")
