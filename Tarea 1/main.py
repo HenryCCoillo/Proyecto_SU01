@@ -1,6 +1,8 @@
 from ast import While
 from os import path
-import json
+import os
+import pandas as pd
+from csv import DictWriter
 
 class Libro:
     def __init__(self,id:str = None ,titulo:str = None,genero:str= None,isbn= None,editorial= None,autor= None) -> None:
@@ -17,32 +19,52 @@ class Libro:
     def leer_archivo(self):
         libro = input("Escriba el archivo : ")
         if libro:
-            if path.exists(libro):            
-                with open(libro,encoding="utf-8") as archivo:
-                    print(archivo.read())
+            if path.exists(libro):
+                if os.path.splitext(libro)[1] == '.txt':
+                    with open(libro,encoding="utf-8") as archivo:
+                        print(archivo.read())
+                elif os.path.splitext(libro)[1] == '.csv':
+                    with open(libro,encoding="utf-8") as archivo:
+                        archivo = pd.read_csv(libro)
+                        # archivo = pd.read_csv(libro,index_col="id")
+                        print(archivo)
+                else:
+                    print("Solo se puede leer Archivos .txt o .csv")                        
             else:
                 print("El archivo no existe")
         else:
             print("Escriba el archivo")
 
-
     def listar_libros(self):
-        with open("prueba.json",encoding="utf-8") as archivo:
-            datos_libros = json.load(archivo)
+        data=pd.read_csv("Libros.csv")
+        print(data)
+        
 
-            for i in datos_libros:
-                diccionario_libro = datos_libros[i]
-                nombre_libro_id =diccionario_libro["id"]
-                nombre_libro_titulo = diccionario_libro["titulo"]
-                nombre_libro_genero =diccionario_libro["genero"] 
-                nombre_libro_isbn =diccionario_libro["isbn"] 
-                nombre_libro_editorial =diccionario_libro["editorial"] 
-                nombre_libro_autor =diccionario_libro["autor"] 
-                print(f"\n-El Libro llamano {nombre_libro_titulo}, su genero es {nombre_libro_genero}, su codigo de isbn es {nombre_libro_isbn}, la editorial es {nombre_libro_editorial} y el autor es {nombre_libro_autor}\n")
+    def agregar_libros(self):
+        
+        codigo=input("ingrese ID: ")
+        titulo=input("Ingrese título: ")
+        genero=input("Ingrese genero: ")
+        isbn=input("Ingrese ISBN: ")
+        editorial=input("Ingrese editorial: ")
+        autor=input("Ingrese autor: ")
+        
+        headersCSV = ['id','titulo','genero','isbn','editorial','autor']      
 
+        dict={'id':codigo,'titulo':titulo,'genero':genero,'isbn':isbn,'editorial':editorial,'autor':autor}
+        with open('Libros.csv', 'a', newline='',encoding='utf-8-sig') as f_object:
+            dictwriter_object = DictWriter(f_object, fieldnames=headersCSV)    
+            dictwriter_object.writerow(dict)
+            f_object.close()
 
-
-
+    def eliminar_libro(self):
+        data=pd.read_csv("Libros.csv")
+        print(data)
+        eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
+        data.set_index('id',inplace=True) 
+        data = data.drop(eliminar_fila_libro) 
+        data.to_csv('Libros.csv')
+        
 
 
 if __name__ == '__main__':
@@ -66,25 +88,21 @@ Opción 11: Salir del Programa.
             while True:
                 try:
                     opcion = int(input("Digite la Opcion: "))
+                    break
                 except ValueError:
                     print("Debes Escribir un numero Valido")
                     continue
-                
-                if opcion:
-                    break
+
 
             libro = Libro()
             if opcion == 1:
                 libro.leer_archivo()
             elif opcion ==2:
-                pass
-
+                libro.listar_libros()
             elif opcion ==3:
-                pass
-
+                libro.agregar_libros()
             elif opcion ==4:
-                pass
-
+                libro.eliminar_libro()
             elif opcion ==5:
                 pass
 
