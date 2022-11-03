@@ -30,7 +30,7 @@ class Libro:
                 print(datos)
 
 
-    def listar_libros(self):
+    def listar_libros1(self):
         data=pd.read_csv("D:\\BootCamp\\Proyecto_Silabuz\\Proyecto_SU01\\Tarea 1\\Libros.csv")
         data2=data[['titulo','genero','isbn','editorial','autor']]
         data3=data2.to_string(index=False)
@@ -57,6 +57,31 @@ class Libro:
             
    
             f_object.close()
+            
+            
+            
+    def eliminar_libro(self):
+        data=pd.read_csv('D:\\BootCamp\\Proyecto_Silabuz\\Proyecto_SU01\\Tarea 1\\Libros.csv',encoding='utf-8-sig')
+        
+        eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
+        data.set_index('id',inplace=True) 
+        data = data.drop(eliminar_fila_libro) 
+        data.to_csv('D:\\BootCamp\\Proyecto_Silabuz\\Proyecto_SU01\\Tarea 1\\Libros.csv',encoding='utf-8-sig')
+        
+    def listar_libros(self):
+        data=pd.read_csv('D:\\BootCamp\\Proyecto_Silabuz\\Proyecto_SU01\\Tarea 1\\Libros.csv',encoding='utf-8-sig')
+        data2=data.to_string(index=False)
+        print(data2)
+        
+        
+    def ordenar_libros(self):
+        data=pd.read_csv('D:\\BootCamp\\Proyecto_Silabuz\\Proyecto_SU01\\Tarea 1\\Libros.csv',encoding='utf-8-sig')
+        
+        data = data.sort_values(by=['titulo'], ascending=[True])
+        
+        data2=data.to_string(index=False)
+        
+        print(data2)
 
 
 
@@ -92,19 +117,23 @@ Opción 11: Salir del Programa.
             if opcion == 1:
                 libro.leer_archivo()
             elif opcion == 2:
-                libro.listar_libros()
+                libro.listar_libros1()
 
             elif opcion == 3:
                 libro.agregar_libros()
 
             elif opcion ==4:
-                pass
+                data = libro.listar_libros()
+                print(data)
+                data2 = libro.eliminar_libro()
+                print(data2)
 
             elif opcion ==5:
                 pass
 
             elif opcion ==6:
-                pass
+                
+                data2=libro.ordenar_libros()
 
             elif opcion ==7:
                 pass
