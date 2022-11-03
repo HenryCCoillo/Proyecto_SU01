@@ -16,3 +16,46 @@ Opción 8: Buscar libros por número de autores. Se debe ingresar un número por
 Opción 9: Editar o actualizar datos de un libro (título, género, ISBN, editorial y autores).
 Opción 10: Guardar libros en archivo de disco duro (.txt o csv).
 Nota: listar libros involucra: título, género, ISBN, editorial y autor(es)
+
+
+jemplos de uso de splitext
+Finalmente aquí dejo algo de código que prueba con distintas cadenas para que nos demos una idea de cómo trabaja con los nombres que no tienen extensión:
+
+
+También puedes descargar el ejemplo, Instalar Python y luego ejecutar python main.py para ejecutarlo. Te invito a conocer más sobre Python aquí.
+
+Estoy disponible para trabajar en tu proyecto o realizar tu tarea pendiente, no dudes en ponerte en contacto conmigo.
+Si el post fue de tu agrado muestra tu apoyo compartiéndolo, suscribiéndote al blog, siguiéndome o realizando una donación.
+
+Suscribir por correo
+Ingresa tu correo y recibirás mis últimas entradas sobre programación, open source, bases de datos y todo lo relacionado con informática
+
+Email
+
+También puedes descargar el ejemplo, Instalar Python y luego ejecutar python main.py para ejecutarlo. Te invito a conocer más sobre Python aquí.
+
+Estoy disponible para trabajar en tu proyecto o realizar tu tarea pendiente, no dudes en ponerte en contacto conmigo.
+Si el post fue de tu agrado muestra tu apoyo compartiéndolo, suscribiéndote al blog, siguiéndome o realizando una donación.
+
+Suscribir por correo
+Ingresa tu correo y recibirás mis últimas entradas sobre programación, open source, bases de datos y todo lo relacionado con informática
+
+Email
+También puedes descargar el ejemplo, Instalar Python y luego ejecutar python main.py para ejecutarlo. Te invito a conocer más sobre Python aquí.
+
+Estoy disponible para trabajar en tu proyecto o realizar tu tarea pendiente, no dudes en ponerte en contacto conmigo.
+Si el post fue de tu agrado muestra tu apoyo compartiéndolo, suscribiéndote al blog, siguiéndome o realizando una donación.
+
+Suscribir por correo
+Ingresa tu correo y recibirás mis últimas entradas sobre programación, open source, bases de datos y todo lo relacionado con informática
+
+Email
+También puedes descargar el ejemplo, Instalar Python y luego ejecutar python main.py para ejecutarlo. Te invito a conocer más sobre Python aquí.
+
+Estoy disponible para trabajar en tu proyecto o realizar tu tarea pendiente, no dudes en ponerte en contacto conmigo.
+Si el post fue de tu agrado muestra tu apoyo compartiéndolo, suscribiéndote al blog, siguiéndome o realizando una donación.
+
+Suscribir por correo
+Ingresa tu correo y recibirás mis últimas entradas sobre programación, open source, bases de datos y todo lo relacionado con informática
+
+Email
