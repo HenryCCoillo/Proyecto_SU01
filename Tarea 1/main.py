@@ -89,6 +89,7 @@ Opción 11: Salir del Programa.
             libro = Libro()
             if opcion == 1:
                 libro.leer_archivo()
+                
             elif opcion ==2:
                 data = libro.listar_libros()
                 print(data)
@@ -97,7 +98,6 @@ Opción 11: Salir del Programa.
                 libro.agregar_libros()
 
             elif opcion ==4:
-
                 data = libro.listar_libros()
                 print(data)                
                 id_filas = [id_fila for id_fila,fila in data.iterrows()]
@@ -110,9 +110,41 @@ Opción 11: Salir del Programa.
                 libro.eliminar_libro(data,id=eliminar_fila_libro)
 
             elif opcion ==5:
-                pass
+                data = libro.listar_libros()
+                print(data)
+                buscar = input("""Buscar libro por: ISBN o Título: """).lower()
+                if buscar == "isbn":
+                    lista_isbn = list(set(data["isbn"]))
+                    buscar_isbn = input("Escriba el ISBN a buscar: ")
+                    while buscar_isbn not in lista_isbn:
+                        buscar_isbn = input("El ISBN no se encuentra, Escriba otro ISBN a buscar: ")
+
+                    isbn = data[data["isbn"] == buscar_isbn]
+                    print(isbn)
+                    
+                elif buscar == "titulo" or buscar == "título":
+                    lista_titulo = list(set(data["titulo"]))
+                    buscar_titulo = input("Escriba el Título a buscar: ")
+                    while buscar_titulo not in lista_titulo:
+                        buscar_titulo = input("El Título no se encuentra, Escriba otro Título a buscar: ")
+
+                    titulo = data[data["titulo"] == buscar_titulo]
+                    print(titulo)
+                else:
+                    print("No existe esa Categoria")
+                
+
             elif opcion ==6:
-                pass
+                data = libro.listar_libros()
+                print(data)
+
+                lista_titulo = list(set(data["titulo"]))
+                buscar_titulo = input("Escriba el Título a buscar: ")
+                while buscar_titulo not in lista_titulo:
+                    buscar_titulo = input("El Título no se encuentra, Escriba otro Titulo a buscar: ")
+                titulo = data[data["titulo"] == buscar_titulo]
+                print(titulo)
+
             elif opcion ==7:
                 data = libro.listar_libros()
                 print(data)
