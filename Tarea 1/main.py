@@ -105,9 +105,11 @@ class Libro:
         buscar = input("""Buscar libro por: autor, editorial o género: """).lower()
         if buscar == "autor":
             lista_autor = list(set(data["autor"]))
+            
             buscar_autor = input("Escriba el autor a buscar: ")
             while buscar_autor not in lista_autor:
                 buscar_autor = input("El autor no se encuentra, Escriba otro autor a buscar: ")
+
             # data[data["autor"].str.contains("Ciro Alegría")]
             autor = data[data["autor"] == buscar_autor]
             print(autor)
@@ -129,7 +131,58 @@ class Libro:
             print(genero)
 
         else:
-            print("No existe esa categoria")    
+            print("No existe esa categoria")
+
+
+    def editar_libro_titulo_genero_isbn_editorial_autor(self):
+            
+            data = self.listar_libros()
+            print(data)
+            
+            id_filas = [id_fila for id_fila,fila in data.iterrows()]
+    
+            editar_libro_id = int(input("Escribe el ID del Libro a editar: "))
+
+            while editar_libro_id not in id_filas:
+                editar_libro_id = int(input("El ID no existe, Escriba el ID a Eliminar: "))
+
+            print(data.iloc[editar_libro_id-1:editar_libro_id])
+
+            print("¿Que campo desea cambiar?")
+            print("1) Título")
+            print("2) Género")
+            print("3) ISBN")
+            print("4) Editorial")
+            print("5) Autor")
+
+            editar_libro_columna = int(input("Digite un numero: "))
+
+            while editar_libro_columna not in (1,2,3,4,5):
+                editar_libro_columna = int(input("Numero Incorrecto, solo puede digitar 1, 2, 3, 4 o 5: "))
+
+            if editar_libro_columna == 1:
+                editar_libro_columna = "titulo"
+
+            elif editar_libro_columna == 2:
+                editar_libro_columna = "genero"
+
+            elif editar_libro_columna == 3:
+                editar_libro_columna = "isbn"
+
+            elif editar_libro_columna == 4:
+                editar_libro_columna = "editorial"
+            else:
+                editar_libro_columna = "autor"
+
+            editar_libro_valor = input("Escribe la valor a reemplazar: ").title()
+
+            data.loc[editar_libro_id,editar_libro_columna] = editar_libro_valor
+
+            # print(data.iloc[editar_libro_id-1:editar_libro_id])
+            print(data)
+            
+            data.to_csv('Libros.csv')
+
 
 if __name__ == '__main__':
     try:
@@ -155,6 +208,7 @@ Opción 11: Salir del Programa.
                     break
                 except ValueError:
                     print("Debes Escribir un numero Valido")
+                
 
             libro = Libro()
             if opcion == 1:
@@ -182,7 +236,31 @@ Opción 11: Salir del Programa.
             elif opcion ==8:
                 pass
             elif opcion ==9:
-                pass
+                libro.editar_libro_titulo_genero_isbn_editorial_autor()
+                # data = libro.listar_libros()
+                # print(data)
+                
+                # id_filas = [id_fila for id_fila,fila in data.iterrows()]
+        
+                # editar_libro_id = int(input("Escribe el ID del Libro a editar: "))
+
+                
+                # while editar_libro_id not in id_filas:
+                #     editar_libro_id = int(input("El ID no existe, Escriba el ID a Eliminar: "))
+
+                # print(data.iloc[editar_libro_id-1:editar_libro_id])
+
+                # editar_libro_columna = input("Escribe la columna a cambir titulo, genero, ISBN, editorial o autor: ")
+
+                # editar_libro_valor = input("Escribe la palabra a reemplazar: ")
+
+                # data.loc[editar_libro_id,editar_libro_columna] = editar_libro_valor
+
+                # print(data.iloc[editar_libro_id-1:editar_libro_id])
+                
+                # data.to_csv('Libros.csv')
+
+
             elif opcion ==10:
                 pass
             elif opcion == 11:
@@ -195,3 +273,5 @@ Opción 11: Salir del Programa.
         print("Saliendo...")
         exit()
 
+libro = Libro()
+libro.leer_archivo()
