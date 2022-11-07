@@ -3,6 +3,17 @@ import json
 
 ################################################################################
 
+print("\t\t.:LISTA DE POKE-API:.")
+print("Pokemon por Generacion -> 1\n"
+      "Pokemon por Generacion -> 2\n"
+      "Pokemon por Generacion -> 3\n"
+      "Pokemon por Generacion -> 4\n"
+      "Pokemon por Generacion -> 5\n")
+
+gen1 = input("Introduce la generacion que desea: ")
+
+if ()
+
 print("\t\t.:GENERACION POKEMON:.")
 print("1.Generation-1\n"
       "2.Generation-2\n"
@@ -14,10 +25,10 @@ print("1.Generation-1\n"
       "8.Generation-8\n")
 
 url_1 = 'https://pokeapi.co/api/v2/generation/'
-gen1 = input("Introduce la generacion: ")
+gen1 = input("Introduce la generacion que desea: ")
 
 
-def lista_pokemon(id1):
+def gen_pokemon(id1):
     response = requests.get(url_1+id1)
 
     data = response.json()
@@ -27,7 +38,7 @@ def lista_pokemon(id1):
 
 
 for id1 in gen1:
-    lista_pokemon(id1)
+    gen_pokemon(id1)
 
 ################################################################################
 
@@ -66,3 +77,37 @@ for id3 in hab:
     habilidad_pokemon(id3)
 
 ################################################################################
+
+url_4 = 'https://pokeapi.co/api/v2/pokemon-habitat/'
+habitad = input("Ingrese habitad que desea: ")
+
+
+def habitad_pokemon(id4):
+    resp = requests.get(url_4 + id4)
+
+    data = resp.json()
+
+    habitad_pokemon = [nombre['pokemon']['name'] for nombre in data['pokemon']]
+    print(f"Lista de pokemon por habitad: {habitad_pokemon}")
+
+
+for id4 in habitad:
+    habitad_pokemon(id4)
+
+################################################################################
+
+url_5 = 'https://pokeapi.co/api/v2/pokemon-habitat/'
+tipo = input("Ingrese habitad que desea: ")
+
+
+def tipo_pokemon(id5):
+    response = requests.get(url_5 + id5)
+
+    data = response.json()
+
+    tipo = [nombre['pokemon']['name'] for nombre in data['pokemon']]
+    print(f"Lista de pokemon por habitad: {tipo}")
+
+
+for id5 in tipo:
+    tipo_pokemon(id5)
