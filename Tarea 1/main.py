@@ -234,4 +234,8 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
         print("Saliendo...")
+<<<<<<< HEAD
         exit()
+=======
+        exit()
+>>>>>>> 5b1e99d41ad4d4ac64b0149e79a9d18b665156f1
