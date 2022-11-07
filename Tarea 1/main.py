@@ -39,7 +39,7 @@ class Libro:
             datos_libros = json.load(archivo)
 
             for i in datos_libros:
-                diccionario_libro = datos_libros[i]
+                diccionario_libro = datos_libros["i"]
                 nombre_libro_id = diccionario_libro["id"]
                 nombre_libro_titulo = diccionario_libro["titulo"]
                 nombre_libro_genero = diccionario_libro["genero"]
@@ -56,7 +56,7 @@ class Libro:
                 elif os.path.splitext(libro)[1] == '.csv':
                     with open(libro, encoding="utf-8") as archivo:
                         archivo = pd.read_csv(libro)
-                        # archivo = pd.read_csv(libro,index_col="id")
+                        #archivo = pd.read_csv(libro,index_col="id")
                         print(archivo)
                 else:
                     print("Solo se puede leer Archivos .txt o .csv")
