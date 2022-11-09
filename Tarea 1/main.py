@@ -61,12 +61,16 @@ class Libro:
         data = self.listar_libros()
         print(data)
 
+
         id_filas = [id_fila for id_fila, fila in data.iterrows()]  # Extrae todos los ID en un Array
+
         eliminar_fila_libro = int(input("Escriba el ID del Libro a Eliminar: "))
         while eliminar_fila_libro not in id_filas:
             eliminar_fila_libro = int(input("El ID no existe, Escriba el ID a Eliminar: "))
 
-        data = data.drop(eliminar_fila_libro)  # Elimina la fila
+
+        data = data.drop(eliminar_fila_libro) #Elimina la fila
+
         data.to_csv('Libros.csv')
 
     def buscar_libro_isbn_titulo(self):
@@ -76,6 +80,7 @@ class Libro:
         print("\n¿Qué categoría desea buscar?\n")
         print("1) ISBN")
         print("2) Título")
+
 
         buscar_isbn_titulo = int(input("\nDigite un número: "))
         while buscar_isbn_titulo not in (1, 2):
@@ -92,6 +97,22 @@ class Libro:
             titulo = data[data["titulo"].str.contains(buscar_titulo)]
             print(titulo)
 
+        
+        buscar_isbn_titulo = int(input("\nDigite un número: "))
+        while buscar_isbn_titulo not in (1,2):
+            buscar_isbn_titulo = int(input("Número Incorrecto, solo puede digitar 1 o 2: "))
+
+        if buscar_isbn_titulo == 1: #Busqueda por ISBN
+            buscar_isbn = input("\nEscriba el ISBN a buscar: ")
+            isbn = data[data["isbn"].str.contains(buscar_isbn)]
+            print(isbn)
+  
+
+        else: #Busqueda por Título
+            buscar_titulo = input("\nEscriba el Título a buscar: ")
+            titulo = data[data["titulo"].str.contains(buscar_titulo)]
+            print(titulo)  
+
     def ordenar_libro(self):
         data = pd.read_csv('Libros.csv', index_col="id", encoding='utf-8')
         data = data.sort_values(by=['titulo'], ascending=[True])
@@ -107,69 +128,74 @@ class Libro:
         print("3) Género")
 
         buscar_autor_editorial_genero = int(input("\nDigite un número: "))
-        while buscar_autor_editorial_genero not in (1, 2, 3):
+
+        while buscar_autor_editorial_genero not in (1,2,3):
             buscar_autor_editorial_genero = int(input("Número Incorrecto, solo puede digitar 1, 2 o 3: "))
 
-        if buscar_autor_editorial_genero == 1:  # Busqueda por Autor
+        if buscar_autor_editorial_genero == 1: #Busqueda por Autor
+
             buscar_autor = input("\nEscriba el autor a buscar: ").title()
             autor = data[data["autor"].str.contains(buscar_autor)]
             print(autor)
+
 
         elif buscar_autor_editorial_genero == 2:  # Busqueda por Editorial
             buscar_editorial = input("\nEscriba la editorial a buscar: ").title()
             editorial = data[data["editorial"].str.contains(buscar_editorial)]
             print(editorial)
 
+        else: #Busqueda por Género
 
-        else:  # Busqueda por Género
             buscar_genero = input("\nEscriba el genero a buscar: ").title()
             genero = data[data["genero"].str.contains(buscar_genero)]
             print(genero)
 
     def editar_libro_titulo_genero_isbn_editorial_autor(self):
 
-        data = self.listar_libros()
-        print(data)
+            data = self.listar_libros()
+            print(data)
+            
+            id_filas = [id_fila for id_fila,fila in data.iterrows()] #Extrae todos los ID en un Array
+            editar_libro_id = int(input("\nEscribe el ID del Libro a editar: "))
+            while editar_libro_id not in id_filas:
+                editar_libro_id = int(input("El ID no existe, Escriba el ID a Eliminar: "))
 
-        id_filas = [id_fila for id_fila, fila in data.iterrows()]  # Extrae todos los ID en un Array
-        editar_libro_id = int(input("\nEscribe el ID del Libro a editar: "))
-        while editar_libro_id not in id_filas:
-            editar_libro_id = int(input("El ID no existe, Escriba el ID a Eliminar: "))
+            print(data.iloc[editar_libro_id-1:editar_libro_id]) #Imprime el ID a Editar
 
-        print(data.iloc[editar_libro_id - 1:editar_libro_id])  # Imprime el ID a Editar
+            print("\n¿Que campo desea cambiar?")
+            print("1) Título")
+            print("2) Género")
+            print("3) ISBN")
+            print("4) Editorial")
+            print("5) Autor")
 
-        print("\n¿Que campo desea cambiar?")
-        print("1) Título")
-        print("2) Género")
-        print("3) ISBN")
-        print("4) Editorial")
-        print("5) Autor")
+            editar_libro_columna = int(input("\nDigite un número: "))
 
-        editar_libro_columna = int(input("\nDigite un número: "))
+            while editar_libro_columna not in (1,2,3,4,5):
+                editar_libro_columna = int(input("Número Incorrecto, solo puede digitar 1, 2, 3, 4 o 5: "))
 
-        while editar_libro_columna not in (1, 2, 3, 4, 5):
-            editar_libro_columna = int(input("Número Incorrecto, solo puede digitar 1, 2, 3, 4 o 5: "))
 
-        if editar_libro_columna == 1:  # Edita por Columna Titulo
-            editar_libro_columna = "titulo"
+            if editar_libro_columna == 1: #Edita por Columna Titulo
+                editar_libro_columna = "titulo"
 
-        elif editar_libro_columna == 2:  # Edita por Columna Genero
-            editar_libro_columna = "genero"
+            elif editar_libro_columna == 2: #Edita por Columna Genero
+                editar_libro_columna = "genero"
 
-        elif editar_libro_columna == 3:  # Edita por Columna ISBN
-            editar_libro_columna = "isbn"
+            elif editar_libro_columna == 3: #Edita por Columna ISBN
+                editar_libro_columna = "isbn"
 
-        elif editar_libro_columna == 4:  # Edita por Columna Editorial
-            editar_libro_columna = "editorial"
+            elif editar_libro_columna == 4: #Edita por Columna Editorial
+                editar_libro_columna = "editorial"
 
-        else:  # Edita por Columna Autor
-            editar_libro_columna = "autor"
+            else: #Edita por Columna Autor
+                editar_libro_columna = "autor"
 
-        editar_libro_valor = input("Escribe la valor a reemplazar: ").title()
-        data.loc[editar_libro_id, editar_libro_columna] = editar_libro_valor
-        print(data.iloc[editar_libro_id - 1:editar_libro_id])
+            editar_libro_valor = input("Escribe la valor a reemplazar: ").title()
+            data.loc[editar_libro_id,editar_libro_columna] = editar_libro_valor
+            print(data.iloc[editar_libro_id-1:editar_libro_id])
+            
+            data.to_csv('Libros.csv')
 
-        data.to_csv('Libros.csv')
 
 
 if __name__ == '__main__':
@@ -210,10 +236,10 @@ if __name__ == '__main__':
             elif opcion == 4:
                 libro.eliminar_libro()
 
-            elif opcion == 5:
+            elif opcion ==5:
                 libro.ordenar_libro()
 
-            elif opcion == 6:
+            elif opcion ==6:
                 libro.buscar_libro_isbn_titulo()
 
             elif opcion == 7:
@@ -236,4 +262,5 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("Saliendo...")
 
-exit()
+        exit()
+
